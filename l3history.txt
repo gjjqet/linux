@@ -1,0 +1,81 @@
+ls ..
+cd ..
+cd
+cd --
+cd/
+
+
+=>History Command
+
+=>Clear Terminal
+clear
+ctrl+m+l(clear)
+ctrl+l(clear)
+
+ctrl+m  (New Line)
+
+
+
+
+=>Open Terminal
+ctrl+alt+t
+
+
+
+=>Close Terminal
+ctrl+d(exit)
+
+
+=>Cursor to start char in Terminal
+ctrl+a
+ctrl+e
+
+
+=>Find used commands again
+ctrl+r
+enter (if you want to use)
+ctrl+g (if you want to cancle)
+
+
+=>Command Callback
+
+Press up arrow key     (callback)
+Press down arrow key   (callback)
+!!                     (callback last command and run again)
+history                (see all commands history)
+!1456                  (callback history from command and run again)
+!1456                  (get command from commands history just print)
+history 5               (see last commands history)
+history -c              (clear all history)
+
+
+=>wget
+https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1xw:0.74975xh;center,top&resize=1200:*
+ls
+
+
+
+=>
+ctrl + alt+ t
+ls
+ls -l
+ls -a
+ls -l -a
+ls -lah   (or) ls -alh
+cat .bash_history
+vim .bash_history
+ctrl+c
+:qa!
+
+
+=>Ingnore Space
+ls -l -a
+history
+ ls -la
+history
+cd
+cd 
+cd 
+cd 
+cd 
+history

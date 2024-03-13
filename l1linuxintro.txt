@@ -1,0 +1,61 @@
+=>Linus Karnel
+
+=>Linus Distribution
+https://distrowatch.com
+https://distrowatch.com/ > (Menu Bar) >distrowatch.com > Page Hit Ranking
+ 
+Unbuto Linus       Free
+Centos             Free
+Redhat             Paid(Not Open Source)
+Suse               Free and Paid
+Fedora             Free
+Debian             Free
+Linus Mint         Free
+Arch Linus         Free
+
+=>Open Terminal (Linus is case sensitive Operation System)
+ctrl + alt + t
+
+=>Linus Color Coading
+Blue = Directory (such as url,etc)
+Green = Executble or recognized data file
+Skyblue = Symbolic link file
+Pink    =  Graphic image file
+Red     =  Archive file (zip,tar,tar.gz etc..)
+
+
+=>Common Directories
+/            "Root" the top of the file system
+/bin         Binary or executable programs
+/etc         System configuration files
+/home        home directory. it is the default current directory
+/opt         Optional or third-party software
+/tmp         Temporty space, typically cleared on reboot
+/usr         User related programs
+/var         Variable data, most notably log files
+
+=>Basic Line Command
+ls   -    Lists directory contents
+cd   -     Changes the current directory
+pwd  -    Displays the present working directory
+cat  -    Concatenates and display file
+echo  -   Display arguments to the screen
+exit  -   Exits the shell or your current session
+clear  -   Clear the screen
+
+
+
+=>APT (Advanced Packaging Tool)
+
+sudo apt-get update
+sudo apt update
+
+sudo apt-get upgrade
+sudo apt upgrade
+
+sudo apt-get upgrade -y
+sudo apt upgrade -y
+
+sudo apt-get update && sudo apt-get upgrade -y
+
+ 

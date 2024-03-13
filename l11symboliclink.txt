@@ -1,0 +1,98 @@
+=>Symbolic Link
+
+=>In Same Folder
+
+ls -l
+mkdir -p l11folder
+ls -l
+cd l11folder
+echo "Hello sir" > file0.txt
+ls
+cat file0.txt
+
+ln -s l11folder l11shortcut
+ls -l
+cd l11shortcut
+ls -l
+cat file0.txt
+
+cd l11folder
+ls
+echo "Hello world" > file1.txt
+ls
+
+cd -
+cd l11shortcut
+ls
+cat file1.txt
+
+echo "Hello Eath" > file2.txt
+
+
+
+cd -
+cd l11folder
+ls
+cat file2.txt
+
+---------------------------
+
+=>Remove Symboliclink
+
+cd -
+rm -rf l11shortcut
+ls -l
+cd l11folder
+ls
+
+-----------------------------
+
+=>Remove Original folder
+cd -
+ln -s l11folder l11shortcut
+ls -l
+
+cd l11shortcut
+ls
+
+cd -
+rm -rf l11folder
+ls -l
+
+cd l11shortcut(can't open , cuz original folder deleted)
+rm -rf l11shortcut
+
+---------------------------------------------------------------------
+
+=>In Different Folder
+
+mkdir -p l11folder
+cd l11folder
+echo "Hello sir" > file0.txt
+ls
+cat file0.txt
+
+cd
+ls
+cd Desktop
+ls -l
+ln -s l11folder l11shortcut (not working)
+ln -s ~/Documents/class/unbuntulinuxbatch1/l11folder l11shortcut9    (~/Music/l11folder l11shortcut )
+cd l11foldershotcut
+ls
+cd -
+rm -rf l11shortcut
+ls
+
+(or)
+
+ln -s l11folder ~/Desktop/l11shotcut
+cd
+ls
+cd Desktop
+ls -l
+cd l11shortcut
+ln -s ~/Documents/class/unbuntulinuxbatch1/l11folder ~/Desktop/l11shortcut
+cd
+ls -l
+cd l11shortcut

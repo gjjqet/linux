@@ -78,6 +78,7 @@ exit
 
 
 
+
 =>Changing Password of Current User
 su
 password : 123456789
@@ -87,6 +88,7 @@ passwd
 Current password :
 New Password : 123456789abc
 retry New password : 123456789abc
+
 
 
 =>Creat New User Account
@@ -120,6 +122,7 @@ return new password : 123456789
 sudo passwd user3
 new password:123456789
 return new password : 123456789
+
 
 
 =>Switch user in terminal
@@ -183,3 +186,37 @@ cd /
 ls
 cd home
 ls -l
+
+
+sudo useradd user1 (without message/without password/without info)
+compgen
+
+sudo adduser user2 (with message/with password/with info)
+compgen -u
+
+sudo useradd user3 -m
+compgen -u
+=>sudo passwd user3
+new password = 123456789
+=>su user3
+password = 123456789
+whoami
+exit
+whoami
+
+
+
+=>Lock or Unlock user password
+sudo passwd -l user3  (l=lock)
+sudo passwd -u user3  (u=unlock)
+
+=sudo passwd -l user3
+su user3
+password = 123456789   (su: Authntication failure)
+whoami   (administrator)
+
+=sudo passwd -u user3
+su user3
+password = 123456789
+whoami
+exit

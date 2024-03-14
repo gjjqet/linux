@@ -29,8 +29,8 @@ getent group
 
 
 
-=>Created user into group
-sudo adduser user1 group1
+=>Created user into group  (cann't use useradd)
+sudo adduser user1 group1     
 sudo adduser user1 group2
 sudo adduser user2 group1
 sudo adduser user4 group1                  (user4 does not exit)

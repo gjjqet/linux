@@ -1,0 +1,31 @@
+=>Check Date
+date  =  Wed 03 Apr 2024 03:35:01 PM +0630
+date -u = Wed 03 Apr 2024 09:05:58 AM UTC
+
+date +"%T" = 15:41:02
+
+date +"%d" = 03
+date +"%D" = 04/03/24
+date +"%F" = 2024-04-03
+date +"%m" = 04
+date +"%y" = 24
+date +"$Y" = 2024
+date +"%d-%m-%y" = 03-04-24
+date +"%d/%m/%Y" = 03/04/2024
+
+
+timedatectl   = Local time: Wed 2024-04-03 15:49:49 +0630
+                Universal time: Wed 2024-04-03 09:19:49 UTC  
+                RTC time: Wed 2024-04-03 09:19:49      
+                Time zone: Asia/Rangoon (+0630, +0630)  
+                System clock synchronized: yes                          
+                NTP service: active                       
+                RTC in local TZ: no  
+
+
+
+=>Using cal
+sudo apt install ncal    
+cal  
+cal 2024    
+

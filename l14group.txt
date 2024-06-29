@@ -1,0 +1,87 @@
+=>Group
+
+=>Display all group
+compgen -g           (only group name)
+getent group         (group name and group id)
+cat /etc/group       (group name and group id)
+
+
+
+=>Creat Group
+sudo groupadd group1  (without message)          (or)    sudo addgroup group2 (with message)
+compgen -g
+
+=>Creat a new Group with a specific group id
+sudo groupadd -g 3000 group3
+sudo groupadd -g 4000 group4
+sudo addgroup group4
+sudo addgroup group5
+getent group
+
+
+
+
+=>Delete Group
+sudo groupdel group6 (without message)  (or)   sudo delgroup group5 (with message)
+getent group
+
+
+
+
+
+=>Created user into group  (cann't use useradd)
+sudo adduser user1 group1     
+sudo adduser user1 group2
+sudo adduser user2 group1
+sudo adduser user4 group1                  (user4 does not exit)
+
+getent passwd
+getent group
+
+
+
+=>Check user's group
+groups user1
+cat /etc/group | grep user1
+
+groups user2
+cat /etc/group | grep user2
+
+
+=>Check group's users
+getent group
+getent group group1
+cat /etc/group
+cat /etc/group  | grep group1
+cat /etc/group | grep group2
+
+
+=>Using libraries to see group members
+sudo apt-get install members
+members group1
+members group2
+
+
+
+=>Add a user to multiple groups
+sudo usermod -aG group2,group3,group4 user2
+getent group
+
+
+
+=>Remove user form group
+sudo gpasswd -d user2 group3
+getent group
+
+
+=>Rename Group
+compgen -g
+getent group group4
+sudo groupmod -n group40 group4
+compgen -g
+
+
+
+
+
+--------------------------------------------------------------------------

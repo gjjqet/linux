@@ -1,0 +1,314 @@
+=>For Shutdown
+sudo poweroff
+
+=>For restart(reboot)
+sudo reboot
+
+=>Check Currently User
+who       //administrator seat0    2024-02-28  19:40(login screen)  administrator:1
+whoami
+
+=>Check Host Name
+hostname     //administrator
+
+
+
+=>Change Host name
+hostnamectl set-hostname Scarlet-PC
+hostname   // Scarlet-PC
+sudo reboot
+
+
+=>Sever Uptime
+uptime
+
+top
+ctl+c (exit)
+
+w
+
+sudo apt-get install glances
+glances
+ctrl+c (exit)
+
+
+
+---------------------------------------------------------------
+
+
+=>Check 32bit processor or 64bit processor
+uname -a
+uname -i  or uname -m       //x86_64
+getconf LONG_BIT            //65
+
+-------------------------------------------------------
+
+=>Check Ubuntu Version
+hostnamectl     //detail info
+cat /etc/os-release   //detail info
+cat /etc/issue       //Ubuntu 20.04
+
+
+-------------------------------------------------------
+
+=>Upgrade New OS Version
+hostnamectl
+do-release-upgrade -c       (Check for a new Ubuntu release version before upgrade)
+sudo do-release-update      (upgrade)
+
+
+
+
+------------------------------------------------------
+
+
+
+=>Login as Root User
+apt-get update // 13: Permission denied
+
+sudo -s
+Enter administrator user password
+apt-get update
+exit
+
+(or)
+
+sudo su
+apt-get update
+whoami      //root
+exit
+
+
+
+
+
+
+=>Setpassword or Changing root's password
+sudo passwd root
+new password : 123456789
+
+sudo -s
+
+
+
+
+=>Login as Root User
+=>Method 1
+sudo -s
+password : 123456789
+whoami
+exit
+
+=>Method 2
+sudo su
+whoami
+exit
+
+=>Method 3
+su -           (su = switch user)
+password : 123456789
+whoami 
+exit
+
+=>Method 4
+su
+whoami
+password : 123456789
+exit 
+
+***su administrator
+
+
+
+
+=>Changing Password of Current User
+su
+password : 123456789
+whoami
+
+passwd
+Current password :
+New Password : 123456789abc
+retry New password : 123456789abc
+
+
+
+
+=>Creat New User Account
+=>Method 1
+sudo useradd user1            (just creat account , without user1 folder)
+=>Method 2
+sudo useradd user1 -m          (cd / , cd home, ls = you will see system created user2 folder in under home)
+
+
+
+
+=>Display all users
+compgen -u                                          (only username)
+getent passwd           (or)   cat /etc/passwd       (allinfo)
+
+=>Display single users
+compgen -u user2
+getent passwd user1         (single user all info)
+id                          (current login group detail info)
+id user1                    (single user group info)
+
+
+=>Set new user password in terminal
+sudo passwd user1
+new password:123456789
+return new password : 123456789
+
+sudo passwd user2
+new password:123456789
+return new password : 123456789
+
+sudo passwd user3
+new password:123456789
+return new password : 123456789
+
+
+
+=>Switch user in terminal
+su user1
+password : 123456789
+whoami
+exit 
+
+su user2
+password : 123456789
+whoami
+exit
+
+
+
+
+
+
+ls -l
+su user2
+password : 123456789
+whoami
+cd /
+ls cd home
+ls -l
+cd administrator   //error can't access
+cd user2          
+cd user3           //error can't access
+mkdir usrfolder3
+echo "Hello" > file0.txt
+ls
+exit
+
+ls -l
+su user3
+password : 123456789
+whoami
+cd/
+lscd home
+ls -l
+cd administrator   //error can't access
+cd user2          //error can't access
+cd user3 
+mkdir userfolder3
+echo "Hello" > file0.txt
+ls
+exit
+
+
+
+
+=>Delete User
+=>Method 1
+sudo deluser (or)userdel user2        (delete user without deleting user files and directories)
+=>Method 2
+sudo deluser --remove-home user3   (delete user deleting files and directories under home folder)
+
+id user2
+compgen -u
+cd /
+ls
+cd home
+ls -l
+
+
+sudo useradd user1 (without message/without password/without info)
+compgen
+
+sudo adduser user2 (with message/with password/with info)
+compgen -u
+
+sudo useradd user3 -m
+compgen -u
+=>sudo passwd user3
+new password = 123456789
+=>su user3
+password = 123456789
+whoami
+exit
+whoami
+
+
+
+=>Lock or Unlock user password
+sudo passwd -l user3  (l=lock)
+sudo passwd -u user3  (u=unlock)
+
+=sudo passwd -l user3
+su user3
+password = 123456789   (su: Authntication failure)
+whoami   (administrator)
+
+=sudo passwd -u user3
+su user3
+password = 123456789
+whoami
+exit
+
+
+
+=>Rename User
+compgen -u
+sudo useradd user4 -m   //creat user       sudo useradd user5 -m
+sudo passwd user4       //creat password   sudo passwd user5 
+sudo password = 123456789
+retry new password = 123456789
+
+whoami
+cd /
+ls
+cd home
+ls -l
+cd
+
+su user4
+passwd = 123456789
+whoami
+exit
+whoami
+
+
+=>Method 1  (user name changed but home/user4 directory will not change)
+sudo usermod -l user40 user4
+
+=>Method 2   (user name changed and home/user4 directory will change)
+sudo usermod -l user50 -d /home/user50 -m user5
+
+
+cd /
+ls
+cd home
+ls -l
+cd
+
+su user40
+password=123456789
+whoami
+exit
+whoami
+
+su user50
+password=123456789
+whoami
+exit
+whoami

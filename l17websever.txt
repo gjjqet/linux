@@ -1,0 +1,282 @@
+=>Web Server
+
+=> Step 1 : Update Your System
+
+   sudo apt-get update
+   sudo apt-get upgrade -y
+   reboot
+
+------------------------------------------------------
+
+=> Step 2 : Install Apache
+   
+   sudo apt install apache2
+
+   Question : y
+
+     Config : /etc/apache2/apache2.conf         The main configuration file is located
+
+      sudo a2enmod rewrite         to enable URL rewriting, you can enable the mode rewrite module
+
+      
+      sudo systemctl restart apache2
+
+    
+Note :sudo systemctl status apache2
+      sudo systemctl enable apache2
+      sudo systemctl stop apache2
+      sudo systemctl start apache2
+      sudo systemctl restart apache2
+
+
+---------------------------------------------------------
+
+=> Step 3 : Mange Firewall
+
+  ufw status
+  sudo ufw enable
+
+  ufw status
+      sudo ufw allow ssh
+      sudo ufw allow 3306                for mysql port
+
+
+ ufw app list
+     
+    sudo ufw allow 'Apache'         to allow HTTP traffic on port : 80
+    sudo ufw allow 'Apache Secure'               to allow HTTPS traffic on port : 443
+    sudo ufw allow 'Apache Full'                 to allow both HTTP and HTTPS traffic
+
+
+sudo ufw status
+sudo ufw reload
+
+----------------------------------------------------------------------------------------------
+
+=> Step 4 : Install MySQL (Optional)  8.0.37
+
+   sudo apt install mysql-server
+
+Question :Do you want to continue? [Y/n]  y 
+
+   sudo mysql_secure_installation
+
+Question : Press y|Y for Yes, any other key for No: n
+           Remove anonymous users? (Press y|Y for Yes, any other key for No) : y            
+           Disallow root login remotely? (Press y|Y for Yes, any other key for No) : n      
+           Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y
+           Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+
+Note : sudo systemctl status mysql                Check MySQL status
+       sudo systemctl start mysql
+
+Note : mysql --version                   Check version without login
+      sudo mysql          or          sudo mysql -u root       
+      SELECT version()                    Check version with login
+      exit  or   /q
+
+----------------------------------------------------------------------------------------
+
+=> Step 5 : Install PHP version  8.3.6
+   
+   sudo apt install software-properties-common
+   sudo apt install php           php --v  or  php --version
+
+Question : y
+
+  sudo nona /var/www/html/info.php
+
+  <?php
+    phpinfo();
+  ?>
+
+Test : enter this url to your browser http://yourseverip/info.php
+
+----------------------------------------------------------------------------------
+
+
+=> Step 6 : Install phpMyAdmin
+
+   sudo apt install phpmyadmin
+
+Question : Do you want to continue ? : y
+           Configuring phpmyadmin                 Note: move cursor top/bottom arrow key , choose spacebar , tab change mode
+           Configure database for phpmyadmin with dbconfig-common?  :  yes
+           MySQL application password for phpmyadmin: mydbsever2024
+
+
+
+           mydbsever2024mydbsever2024
+                            
+
+  sudo systemctl start apache2
+
+Test : enter this url to your browser http://yourseverip/phpmyadmin
+
+
+-------------------------------------------------------------------------------
+
+=> Step 7 : Set Password For Root Account      (For MySQL 8.0 and later version)
+
+sudo mysql -u root
+
+ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY 'mydbsever2025';
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+
+exit or \q
+sudo mysql -u root -p
+mydbsever2025
+exit or \q
+
+mysql -u root -p -h yourseverip
+mysql -u root -p -h 139.59.230.166          //access deny (cuz root account don't have remote permission)
+
+---------------------------------------------------------------------------------
+
+=> Step 8 : Configure Database Remote Access (Optional)
+
+   sudo nano /etc/mysql/mysql.conf.d/mysqld.conf      // Edit Mysql Configuration
+   bind-address = 127.0.1                             // find this line
+   bind-address = 0.0.0                               // change to this line
+
+   sudo systemctl restart mysql
+
+   sudo mysql -u root -p
+   mydbsever2025
+
+  CREATE USER "user1"@"%" IDENTIFIED BY 'userdbsever2025';
+  GRANT ALL PRIVILEGES ON *.* TO 'user1'@'%' WITH GRANT OPTION;
+  FLUSH PRIVILEGES;
+
+  exit
+
+  mysql -u user -p 
+  userdbsever2025
+
+  mysql -u root -p -h yourseverip
+  mysql -u root -p -h 139.59.230.166           // access deny (cuz root account don't have remote permission)
+
+  mysql -u user1 -p -h yourseverip
+  mysql -u user1 -p -h 139.59.230.166           // access (cuz user1 account have remote permission)
+
+
+  route
+
+  linux = ping 139.59.230.166
+          ifconfig  (you need to install net-tools)
+          traceroute 139.59.230.166         (you need to install traceroute )
+          whois 139.59.230.166
+
+  windows = ping 139.59.230.166     or ping 139.59.230.166 -t
+           ipconfig
+           traceroute 139.59.230.166 
+           nslookup 139.59.230.166
+
+
+---------------------------------------------------------------------------------
+
+=> Step 9 : connect DNS Server (Domain Name Server)
+
+    continue to Cloud Computing Class
+
+---------------------------------------------------------------------------------
+
+=> Step 10 : SSL Certificate (Free)
+
+  continue to Cloud Computing Class
+
+
+---------------------------------------------------------------------------------
+
+
+=> Step 11 : Other
+
+   => git
+         sudo apt-get install git
+         git -v   git git version 2.43.0  
+       
+
+   => composer 
+      https://getcomposer.org/download/
+
+      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+      php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+      php composer-setup.php
+      php -r "unlink('composer-setup.php');"
+
+      sudo mv composer.phar /usr/local/bin/composer
+
+   => nodejs
+      https://nodejs.org/en/download/package-manager
+      sudo apt install curl
+
+      => nvm 
+          https://github.com/nvm-sh/nvm
+
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+          export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+          source ~/.bashrc
+
+          nvm -v   0.39.7
+
+
+      => Set node version (Optional)
+         nvm ls        or      nvm -list          or         nvm list-remote
+
+         eg (up use)
+         nvm install v22.3.0
+         nvm use v22.3.0
+
+         eg(up use)
+            nvm install v18.20.3
+            nvm use v18.20.3
+   
+
+
+-------------------------------------------------------------------------------
+Uninstall
+--------------------------------------------------------------------------------
+=> Uninstall Apache 
+
+   sudo systemctl status apache2 
+   sudo systemctl stop apache2 
+
+   sudo apt-get purge apache2 
+   sudo apt-get autoremove 
+
+   = Remove any remaining configuration files and directories
+     sudo rm -rf /etc/apache2 
+     sudo rm -rf /var/www/html
+
+     sudo systemctl status apache2 
+
+-----------------------------------------------------------------
+
+=> Uninstall Mysql 
+   sudo systemctl status mysql
+   sudo systemctl stop mysql
+
+   sudo apt-get purge mysql-server  
+   sudo apt-get autoremove 
+   sudo apt-get autoclean 
+
+= Remove any remaining configuration files and directories
+     sudo rm -rf /etc/mysql 
+     sudo rm -rf /var/lib/mysql 
+     sudo rm -rf /var/log/mysql 
+
+-----------------------------------------------------------------
+
+=> Uninstall Nodejs 
+   sudo apt remove nodejs 
+   sudo apt remove npm 
+
+------------------------------------------------------------------
+

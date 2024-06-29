@@ -1,0 +1,319 @@
+=> Install Package & Remove(Uninstall) Package
+
+=>Package Management System
+(i)apt       (Advanced Package Tool) // Debian-based systems
+(ii)snap     //developed by Canonical, the company behind Ubuntu //cross-distributions support , always up-to-date , huge size/dis space/resource
+
+
+=>Method 1 
+  Using the Ubuntu Software Center
+
+
+=>Method 2
+  =>Finding Software Package
+
+  Ctl + Alt + T
+  dpkg --list  (or) dpkg -l   (or) dpkg-query -l
+  
+  =>Listing all Installed Software Package on Linux
+    sudo apt list --installed
+
+
+    = Install Application
+        sudo apt install packagename
+        sudo apt install packagename -y (or) sudo apt install -y packagename (-y flag = Automatic Yes to Prompts)
+        sudo apt install -s packagename  (-s flag = Simulate Installation, which mean without actually installing )
+        
+        sudo apt update or sudo apt upgrade (must run before install new app )
+
+        sudo apt install git              git -v   (version control system)
+        sudo apt install curl             curl --version     (command-line tool for transferring data with url)
+        sudo apt install wget             (download files from web)
+        sudo apt install vim
+        sudo apt install vlc
+        sudo apt install aptitude         aptitude -v   aptitude search "~i"   (user for list install)    =   dpkg -l
+        sudo apt install net-tools        ifconfig , route  (local IP Address)
+        sudo apt install nodejs           node -v    (v18.19.1)
+        sudo apt install npm              npm -v  9.2.0
+        sudo apt install php              php -v  PHP 8.3.6
+        sudo apt install tree
+
+
+
+=> Firewall (UFW = Uncomplicated Firewall)
+
+    ufw app list
+    ufw status
+    ufw status numbered
+    ufw reload
+    sudo ufw enable (Note :: beware before you enable firewall , that can be lock yourself , do not lock yourself out if using SSH connection.)
+    ufw status
+    sudo ufw disabled
+
+
+    sudo ufw enable
+    sudo ufw deny from 180.235.116.74             (Block an IP Address)
+    sudo ufw allow from 180.235.116.74            (Allow an IP Address )
+
+    sudo ufw deny from 180.235.116.0/20             (Block a Subnet)
+
+    sudo ufw deny in on eth0 from 192.168.1.2       (Block Incoming connection to a Network Interface)
+    sudo ufw allow in on eth0 from 192.168.1.2      (Allow Incomint connection to a Network Interface)
+
+    ufw status
+    ufw status numbered
+
+    sudo ufw delete allow from 180.235.116.74    (Delete UFW rule)
+    sudo ufw delete 3
+
+    sudo ufw allow ssh
+    sudo ufw allow http
+    sudo ufw allow https
+
+
+    =>View details information about specific package
+       apt show packagename          eg. apt show vlc
+
+   =>Remove Package
+      (i) => Remove Package
+          sudo apt remove tree
+
+      (ii) => Remove a package and it's configuration files
+          sudo apt purge tree
+
+      (iii) => Clean Up Unused Dependencies
+          sudo apt autoremove
+
+          =option
+          sudo apt-get clean
+          sudo apt-get --fix-broken install
+
+
+
+
+=>Method 3 : Using snap (snap is already in ubuntu system but (if not installed) sudo apt install snapd)
+
+      =>Viewing Installed Snap Package
+
+      Ctl + Alt + T
+      snap list ****** (have to read doc)      
+
+      =>Finding details about a specific snap
+        snap info packagename
+        snap find packagename
+
+      =>Install Application
+        sudo snap install packagename
+
+        sudo snap install tree
+        sudo snap install vlc
+        sudo snap install discord
+        sudo snap install spotify
+        sudo snap install notepad-plus-plus
+
+   => See changes or updates to snap packages
+      snap change
+
+   => Remove Package
+      (i) => Remove Package
+          sudo snap remove tree
+
+      (ii) => update all installed snap packages
+          sudo snap refresh
+
+
+=> Install Application from Snap Offical Website
+   https://snapcraft.io/
+
+
+-------------------------------------------------------------------------------
+
+
+=> Method 4 : Using PPA (Personal Package Archive)
+
+    =>Viewing Installed Snap Package
+      Ctl + Alt + T
+      ls -l /var/lib/apt/lists
+
+  sudo add-apt-repository ppa:repositoryname                  // https://launchpad.net/ubuntu/+ppas********* (for ppa)
+
+ = Install Application
+   sudo add-apt-repository ppa:phd/firefox
+   sudo apt-get update
+
+  => Remove Package
+      (i) => Remove Package (Method 1)
+            sudo add-apt-repository -r ppa:repositoryname (or) sudo add-apt-repository --remove ppa:repositoryname
+            sudo apt-get update
+            
+            sudo add-apt-repository -r ppa:phd/firefox
+            sudo apt-get update
+
+              => if can't Uninstall (do manually)
+                  sudo rm /etc/apt/sources.list.d/packagename
+
+                  => if needed key name for Uninstall
+                     sudo apt-key list                //find app key name
+                     sudo apt-key del key id
+                     sudo apt update
+
+
+
+      (ii) => Remove Package (Method 2) (need = sudo apt install ppa-purge)
+            sudo ppa-purge ppa:repositoryname
+
+            sudo ppa-purge ppa:phd/firefox
+            sudo apt-get update
+
+
+
+
+
+
+=>Method 5
+  Facial DEB download file install (.deb files on Ubuntu and Debian-based Linux Distributins)
+
+=.deb
+
+  cd ~/Downloads/
+  sudo dpkg -i installer_file.deb
+
+  cd ~/Downloads/
+  sudo apt-get install -f         //Fix Dependencies
+
+
+  => Uninstall
+  sudo dpkg -r slack-desktop
+  sudo apt autoremove
+  sudo apt autoclean
+
+
+  = .deb using gdebi  (sudo apt install gdebi)
+    cd ~/Downloads/
+    sudo gdebi installer_file.deb(expressvpn_3.72.0.0-1_amd64.deb)
+
+   
+
+  =.run
+
+  (i)cd ~/Downloads/
+     sudo chmod +x installer_file.run       //Make their file executable
+
+  (ii)cd ~/Downloads/
+     sh installer_file.run
+
+
+
+------------------------------------------------------------------------------------------------
+
+=>Optional (Not Recommend Way , but good to know)
+
+=>offical site
+https://flatpak.org
+
+=>store
+https://flathub.org
+
+sudo apt install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+
+=Get Update
+flatpak update
+
+
+=Install a Flatpak App 
+Note :: Remove....flatpakref from download file
+
+flatpak install flathub org.mozilla.firefox
+
+Question : (Platform/x86_64/23.08) found in remote flathub Do you want to install it? [Y/n] Y
+Question : Proceed with these changes to the system installation ?[Y/n] Y
+
+
+=Run the Flatpak App
+ flatpak run org.mozilla.firefox
+
+
+=Remove Flatpak App
+ flatpak uninstall org.mozilla.firefox
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+  student test sever password
+
+  ssh root@152.42.198.108
+  hellostudent123ABC
+
+  sudo apt-get update
+  sudo apt-get upgrade
+
+  =>Using write command (Individual Message)
+  write username pts/number       eg.write root pts/1
+
+  =>Using echo Command (Individual Message)
+  echo "This is aung aung, how are you friend" > /dev/pts/1
+
+  =>Using wall Command(Group Message = write all send message to all logged-in users)
+  echo "Hay Guy, Everything OK ?" | sudo wall
+
+
+
+
+
+
+
+=>Notejs Latest Version
+Go = https://nodejs.org/en/download/package-manager
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+Go = https://github.com/nvm-sh/nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+source ~/.bashrc
+nvm -v 0.39.7
+node -v v20.13.1
+npm -v 10.5.2
+
+
+
+-----------------------------------------------------------------------
+
+=> Uninstall the Ubuntu Software Center
+
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt remove gnome-software
+sudo apt purge gnome-software
+
+or
+
+sudo apt remove --purge gnome-software
+
+#Remove Unused Dependencies
+sudo apt autoremove
+
+#Fix Dependencies
+sudo apt-get install -f
+
+#Clean Up configuration files
+sudo apt autoclean 
+
+
+=>Install
+  sudo apt update
+  sudo apt install gnome-software
+
+
+#Check for missing dependencies or fix broken dependencies
+sudo apt --fix-broken install
+
+-----------------------------------------------------------------------------------------------
+
+
+flameshot

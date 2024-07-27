@@ -120,7 +120,7 @@ Test : enter this url to your browser http://yourseverip/phpmyadmin
 
 sudo mysql -u root
 
-ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY 'mydbsever2025';
+ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY 'mydbserver2025';
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 
@@ -129,7 +129,7 @@ FLUSH PRIVILEGES;
 
 exit or \q
 sudo mysql -u root -p
-mydbsever2025
+mydbserver2025
 exit or \q
 
 mysql -u root -p -h yourseverip
@@ -146,7 +146,7 @@ mysql -u root -p -h 139.59.230.166          //access deny (cuz root account don'
    sudo systemctl restart mysql
 
    sudo mysql -u root -p
-   mydbsever2025
+   mydbserver2025
 
   CREATE USER "user1"@"%" IDENTIFIED BY 'userdbsever2025';
   GRANT ALL PRIVILEGES ON *.* TO 'user1'@'%' WITH GRANT OPTION;
